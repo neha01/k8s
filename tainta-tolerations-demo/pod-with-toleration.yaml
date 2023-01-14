@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-with-toleration
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "backend"
+      effect: "NoSchedule"
+    - key: "gpu"
+      operator: "Equal"
+      value: "true"
+      effect: "NoExecute"
+      tolerationSeconds: 60
+  
